@@ -70,8 +70,9 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error.');
+      res
+        .status(500)
+        .json({ errors: [{ msg: `Server error: ${err.message}` }] });
     }
   }
 );
