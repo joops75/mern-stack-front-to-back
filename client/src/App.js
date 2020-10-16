@@ -4,6 +4,10 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import CreateEditProfile from './components/profile-forms/CreateEditProfile';
+import PrivateRoute from './components/routing/PrivateRoute';
+
 // redux
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -25,6 +29,12 @@ const App = () => {
           <Route exact path='/' component={Landing} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute
+            exact
+            path='/create-edit-profile'
+            component={CreateEditProfile}
+          />
         </Switch>
       </Router>
     </Provider>

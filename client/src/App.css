@@ -488,6 +488,25 @@ button {
   margin-bottom: 0.5rem;
 }
 
+.spinner {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  border: 20px solid var(--dark-color);
+  border-top: 20px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
