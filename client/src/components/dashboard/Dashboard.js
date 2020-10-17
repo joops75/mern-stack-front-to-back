@@ -5,6 +5,7 @@ import DashboardActions from './DashboardActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../redux/actions/profile';
+import Alert from '../layout/Alert';
 
 const Dashboard = ({
   auth: { user },
@@ -19,6 +20,7 @@ const Dashboard = ({
     <Spinner />
   ) : (
     <section className='container'>
+      <Alert />
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Welcome {user && user.name}
