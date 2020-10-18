@@ -29,7 +29,7 @@ const AddExperience = ({ addExperienceEducation, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addExperienceEducation(formData, history, true);
+    addExperienceEducation({ ...formData, to: current ? '' : to }, history, true);
   };
 
   return (

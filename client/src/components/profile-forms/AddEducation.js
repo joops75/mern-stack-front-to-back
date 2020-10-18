@@ -37,7 +37,7 @@ const AddEducation = ({ addExperienceEducation, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addExperienceEducation(formData, history, false);
+    addExperienceEducation({ ...formData, to: current ? '' : to }, history, false);
   };
 
   return (
@@ -73,7 +73,7 @@ const AddEducation = ({ addExperienceEducation, history }) => {
         <div className='form-group'>
           <input
             type='text'
-            placeholder='Field Of Study'
+            placeholder='* Field Of Study'
             name='fieldofstudy'
             value={fieldofstudy}
             onChange={(e) => onChange(e)}
@@ -121,7 +121,7 @@ const AddEducation = ({ addExperienceEducation, history }) => {
         </div>
         <input type='submit' className='btn btn-primary my-1' />
         <Link to='/dashboard' className='btn btn-light my-1'>
-          Go Back
+          Go to Dashboard
         </Link>
       </form>
     </section>
