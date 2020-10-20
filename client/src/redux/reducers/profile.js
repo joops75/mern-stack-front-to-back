@@ -1,5 +1,7 @@
 import {
   GET_PROFILE,
+  GET_PROFILES,
+  GET_REPOS,
   UPDATE_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE
@@ -19,6 +21,12 @@ export default (state = initialState, action) => {
     case GET_PROFILE:
     case UPDATE_PROFILE:
       return { ...state, profile: payload, loading: false };
+
+    case GET_PROFILES:
+      return { ...state, profiles: payload, loading: false };
+
+    case GET_REPOS:
+      return { ...state, repos: payload, loading: false };
 
     case PROFILE_ERROR:
       return { ...state, loading: false, error: payload };
