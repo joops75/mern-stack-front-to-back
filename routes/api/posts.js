@@ -98,7 +98,7 @@ router.delete('/:post_id', auth, async (req, res) => {
   }
 });
 
-// @route PUT api/posts/like:post_id
+// @route PUT api/posts/like/:post_id
 // @desc like a post
 // @access private
 
