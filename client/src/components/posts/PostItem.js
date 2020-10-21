@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Moment from 'react-moment';
 import { likeUnlike, deletePost } from '../../redux/actions/post';
 
 const PostItem = ({
+  match,
   post: { _id, user, avatar, name, text, date, likes, comments },
   auth,
   likeUnlike,
-  deletePost
+  deletePost,
+  history
 }) => {
+  const onPostsPage = match.path === '/posts';
+
   return (
     <div key={_id} className='post bg-white p-1 my-1'>
       <div>
@@ -39,17 +43,19 @@ const PostItem = ({
         >
           <i className='fas fa-thumbs-down'></i>
         </button>
-        <Link to={`/post/${_id}`} className='btn btn-primary'>
-          Discussion{' '}
-          {comments.length > 0 && (
-            <span className='comment-count'>{comments.length}</span>
-          )}
-        </Link>
+        {onPostsPage && (
+          <Link to={`/posts/${_id}`} className='btn btn-primary'>
+            Discussion{' '}
+            {comments.length > 0 && (
+              <span className='comment-count'>{comments.length}</span>
+            )}
+          </Link>
+        )}
         {auth.user._id === user && (
           <button
             type='button'
             className='btn btn-danger'
-            onClick={() => deletePost(_id)}
+            onClick={() => deletePost(_id, onPostsPage, history)}
           >
             <i className='fas fa-times'></i>
           </button>
@@ -75,4 +81,7 @@ const mapDispatchToProps = {
   deletePost
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(PostItem));

@@ -1,9 +1,12 @@
 import {
   GET_POSTS,
+  GET_POST,
   ADD_POST,
   POST_ERROR,
   UPDATE_LIKES,
-  DELETE_POST
+  DELETE_POST,
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -19,6 +22,9 @@ export default (state = initialState, action) => {
     case GET_POSTS:
       return { ...state, posts: payload, loading: false };
 
+    case GET_POST:
+      return { ...state, post: payload, loading: false };
+
     case ADD_POST:
       return { ...state, posts: [payload, ...state.posts], loading: false };
 
@@ -33,6 +39,7 @@ export default (state = initialState, action) => {
             ? { ...post, likes: payload.likes }
             : post
         ),
+        post: state.post ? { ...state.post, likes: payload.likes } : state.post,
         loading: false
       };
 
@@ -40,6 +47,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== payload),
+        loading: false
+      };
+
+    case ADD_COMMENT:
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
         loading: false
       };
 
