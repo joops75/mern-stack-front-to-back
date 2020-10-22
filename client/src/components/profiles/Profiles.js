@@ -11,25 +11,27 @@ const Profiles = ({ profile: { profiles, loading }, getAllProfiles }) => {
   }, [getAllProfiles]);
 
   return (
-    <section className="container">
-    {loading ? (
-      <Spinner />
-    ) : (
-      <>
-        <h1 className="large text-primary">Developers</h1>
-        <p className="lead">
-          <i className="fab fa-connectdevelop"></i> Browse and connect with developers
-        </p>
-        <div className="profiles">
-          {profiles.length ?
-            profiles.map((prof) => (
-              <ProfileItem key={prof.id} profile={prof} />
-            ))
-            :
-            <h4>No profiles found...</h4>}
-        </div>
-      </>
-    )}
+    <section className='container'>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h1 className='large text-primary'>Developers</h1>
+          <p className='lead'>
+            <i className='fab fa-connectdevelop'></i> Browse and connect with
+            developers
+          </p>
+          <div className='profiles'>
+            {profiles.length ? (
+              profiles.map((prof) => (
+                <ProfileItem key={prof._id} profile={prof} />
+              ))
+            ) : (
+              <h4>No profiles found...</h4>
+            )}
+          </div>
+        </>
+      )}
     </section>
   );
 };
