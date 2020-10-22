@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const normalizeUrl = require('normalize-url');
 
 const User = require('../../models/User');
 
@@ -47,7 +48,7 @@ router.post(
         name,
         email,
         password: bcrypt.hashSync(password, 10),
-        avatar
+        avatar: normalizeUrl(avatar, { forceHttps: true })
       });
 
       await user.save();

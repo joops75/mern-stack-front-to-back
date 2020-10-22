@@ -13,7 +13,7 @@
   },
   "engines": {
     "node": "12.16.1"
-  },  
+  },
   "author": "Simon Cooper",
   "license": "MIT",
   "dependencies": {
@@ -25,6 +25,7 @@
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
+    "normalize-url": "^5.3.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {

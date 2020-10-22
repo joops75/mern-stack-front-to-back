@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const axios = require('axios');
 const config = require('config');
+const normalizeUrl = require('normalize-url');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
@@ -108,20 +109,22 @@ router.post(
       user: req.user.id,
       company,
       location,
-      website,
+      website: website ? normalizeUrl(website, { forceHttps: true }) : '',
       bio,
       skills: skills.replace(/^\s*,\s*|\s*,\s*$/g, '').split(/\s*,\s*/),
       status,
       githubusername
     };
 
-    profileFields.social = {
-      youtube,
-      twitter,
-      instagram,
-      linkedin,
-      facebook
-    };
+    const socialFields = { youtube, twitter, instagram, linkedin, facebook };
+
+    for (const [key, value] of Object.entries(socialFields)) {
+      if (value) {
+        socialFields[key] = normalizeUrl(value, { forceHttps: true });
+      }
+    }
+
+    profileFields.social = socialFields;
 
     try {
       const profile = await Profile.findOneAndUpdate(
