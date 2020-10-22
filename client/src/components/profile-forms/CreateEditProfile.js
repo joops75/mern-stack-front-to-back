@@ -267,7 +267,7 @@ const CreateProfile = ({
 CreateProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   createEditProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.object.isRequired
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
