@@ -12,6 +12,7 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+import NotFound from './components/layout/NotFound';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // redux
@@ -51,6 +52,7 @@ const App = () => {
           <PrivateRoute exact path='/add-education' component={AddEducation} />
           <PrivateRoute exact path='/posts' component={Posts} />
           <PrivateRoute exact path='/posts/:id' component={Post} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </Provider>
