@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 import {
   GET_PROFILE,
   GET_PROFILES,
@@ -58,7 +58,7 @@ export const getAllProfiles = () => async (dispatch) => {
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
-}
+};
 
 export const getGithubRepos = (github_username) => async (dispatch) => {
   try {
@@ -80,12 +80,7 @@ export const createEditProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    const res = await axios.post('/api/profile', formData, config);
+    const res = await axios.post('/api/profile', formData);
 
     dispatch({
       type: GET_PROFILE,
@@ -120,16 +115,9 @@ export const addExperienceEducation = (
   const expEdu = experience ? 'Experience' : 'Education';
 
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
     const res = await axios.put(
       `/api/profile/${expEdu.toLowerCase()}`,
-      formData,
-      config
+      formData
     );
 
     dispatch({
@@ -156,11 +144,15 @@ export const addExperienceEducation = (
   }
 };
 
-export const deleteExperienceEducation = (id, experience = true) => async dispatch => {
+export const deleteExperienceEducation = (id, experience = true) => async (
+  dispatch
+) => {
   const expEdu = experience ? 'Experience' : 'Education';
 
   try {
-    const res = await axios.delete(`/api/profile/${expEdu.toLowerCase()}/${id}`);
+    const res = await axios.delete(
+      `/api/profile/${expEdu.toLowerCase()}/${id}`
+    );
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -174,14 +166,18 @@ export const deleteExperienceEducation = (id, experience = true) => async dispat
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
-}
+};
 
-export const deleteAccount = () => async dispatch => {
-  if (window.confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+export const deleteAccount = () => async (dispatch) => {
+  if (
+    window.confirm(
+      'Are you sure you want to delete your account? This cannot be undone.'
+    )
+  ) {
     try {
       const res = await axios.delete(`/api/profile`);
 
-      dispatch({ type: ACCOUNT_DELETED});
+      dispatch({ type: ACCOUNT_DELETED });
 
       dispatch({ type: CLEAR_PROFILE });
 
@@ -193,4 +189,4 @@ export const deleteAccount = () => async dispatch => {
       });
     }
   }
-}
+};
